@@ -1,0 +1,32 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.challenge-card {
+  transition: transform 0.2s;
+}
+
+.challenge-card:hover {
+  transform: scale(1.05);
+}
+
+#loginPage,
+#dashboardPage,
+#challengesPage {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.leaderboard-item {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.leaderboard-item:last-child {
+  border-bottom: none;
+}
+
