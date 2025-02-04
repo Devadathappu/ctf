@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media - Stored XSS</title>
+    <link rel="stylesheet" href="css/stored.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chirp</h1>
+            <p>A place to share your thoughts with the world.</p>
+        </header>
+
+        <div class="post-form">
+            <h2>What's on your mind?</h2>
+            <textarea id="postContent" placeholder="Write something..."></textarea>
+            <button onclick="createPost()">Post</button>
+            <div id="resultMessage" class="hint"></div>
+        </div>
+
+        <div class="posts">
+            <h2>Recent Posts</h2>
+            <div id="postList"></div>
+        </div>
+
+        <div class="hint">
+            Hint: Try injecting JavaScript into your post to see if it executes when displayed.
+        </div>
+    </div>
+
+    <script>
+        let posts = [];
+
+        function createPost() {
+            const content = document.getElementById('postContent').value;
+
+            if (!content) {
+                alert("Please write something before posting.");
+                return;
+            }
+
+            posts.unshift({ content });
+            refreshPosts();
+
+            // Check for XSS payload
+            if (content.includes('<script>') || content.includes('onerror=') || content.includes('onclick=')) {
+                document.getElementById('resultMessage').innerHTML = '✅ Challenge completed! You successfully injected JavaScript.';
+            } else {
+                document.getElementById('resultMessage').innerHTML = '';
+            }
+        }
+
+        function refreshPosts() {
+            const postList = document.getElementById('postList');
+            postList.innerHTML = posts.map(post => `
+                <div class="post">
+                    <div>${post.content}</div>
+                </div>
+            `).join('');
+        }
+
+        refreshPosts();
+    </script>
+</body>
+</html>

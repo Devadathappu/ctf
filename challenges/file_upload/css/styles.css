@@ -1,0 +1,204 @@
+/* assets/css/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e272e 0%, #2d3436 100%);
+    color: #fff;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6c5ce7;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 30px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    opacity: 1;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+.upload-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+h1 {
+    color: #6c5ce7;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #a8a8a8;
+    margin-bottom: 30px;
+}
+
+.upload-area {
+    border: 2px dashed rgba(108, 92, 231, 0.3);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+}
+
+.upload-area:hover {
+    border-color: #6c5ce7;
+}
+
+.upload-area h3 {
+    margin: 20px 0 10px;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #6c5ce7;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+
+.upload-btn:hover {
+    background: #5b4bc4;
+    transform: translateY(-2px);
+}
+
+.upload-list {
+    margin-top: 30px;
+}
+
+.file-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.file-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.hints-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    height: fit-content;
+}
+
+.hint {
+    background: rgba(108, 92, 231, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.hint-list {
+    margin-top: 30px;
+}
+
+.hint-list ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.hint-list li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.hint-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #6c5ce7;
+}
+
+#flag-input {
+    width: 300px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    margin-right: 10px;
+}
+
+.submit-btn {
+    padding: 12px 30px;
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background: #5b4bc4;
+}
+
+.upload-status {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+}
+
+.upload-status.success {
+    background: rgba(46, 213, 115, 0.1);
+    color: #2ed573;
+    display: block;
+}
+
+.upload-status.error {
+    background: rgba(255, 71, 87, 0.1);
+    color: #ff4757;
+    display: block;
+}
