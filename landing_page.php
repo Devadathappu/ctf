@@ -28,7 +28,10 @@ header("Expires: 0");
             <div class="profile-dropdown">
                 <a href="#profile">Profile</a>
                 <div class="dropdown-menu">
+                    <a href="signup.html">Account</a>
+                    <a href="php/points.php">Points</a>
                     <a href="php/logout.php">Logout</a>
+                    <a href="php/delete_data.php" onclick="return confirm('Are you sure you want to delete all non-admin data? This action cannot be undone.');">Delete Data</a>
                 </div>
             </div>
         </div>
@@ -46,109 +49,122 @@ header("Expires: 0");
                     <div class="module-list">
                         <div class="module">
                             <h5>1. Introduction to Web Security</h5>
-                            <p>Understanding web architecture and common vulnerabilities</p>
+                            <p>You have just joined as a security analyst at a major company. Your first task is to understand how web applications work and identify common vulnerabilities before attackers exploit them.</p>
+                            <p><strong>Hint:</strong> Think like a hacker. What common mistakes do developers make?</p>
                             <button class="btn" onclick="deployLab('intro')">Deploy Lab</button>
                         </div>
                         <div class="module">
-                            <h5>2. Cross-Site Scripting (XSS)</h5>
-                            <p>Learn about different types of XSS attacks</p>
+                            <p>A mysterious attacker has been injecting malicious scripts into web pages, stealing user credentials. Can you find how they are doing it and stop them?</p>
+                            <p><strong>Hint:</strong> User input fields are often the weakest link. Try injecting something unexpected.</p>
                             <button class="btn" onclick="deployLab('xss')">Deploy Lab</button>
                         </div>
                         <div class="module">
-                            <h5>3. Indirect Object Reference (IDOR)</h5>
-                            <p>Learn about IDOR attacks</p>
+                            <p>Hackers are exploiting access control flaws to view unauthorized data. Your mission is to investigate and patch these vulnerabilities before customer data is leaked.</p>
+                            <p><strong>Hint:</strong> URLs and API requests may reveal more than they should.just check the url and increment last digit!</p>
                             <button class="btn" onclick="deployLab('idor')">Deploy Lab</button>
                         </div>
                         <div class="module">
-                            <h5>4. HTML Injection</h5>
-                            <p>Learn about HTML Injection</p>
-                            <button class="btn" onclick="deployLab('html')">Deploy Lab</button>
-                        </div>
-                        <div class="module">
-                            <h5>5. Directory Traversal</h5>
-                            <p>Learn about Directory Traversal</p>
-                            <button class="btn" onclick="deployLab('traversal')">Deploy Lab</button>
-                        </div>
-                        <div class="module">
-                            <h5>6. File Upload Vulnerability</h5>
-                            <p>Learn about File Upload Vulnerability</p>
+                            <p>Someone uploaded a suspicious file to the system, leading to a breach. Investigate and understand how attackers exploit file uploads.</p>
+                            <p><strong>Hint:</strong> Not all files are safe. Can an uploaded file execute code?</p>
                             <button class="btn" onclick="deployLab('file')">Deploy Lab</button>
                         </div>
+                    
                         <div class="module">
-                            <h5>7. Command Injection</h5>
-                            <p>Learn about Command Injection Vulnerability</p>
-                            <button class="btn" onclick="deployLab('command')">Deploy Lab</button>
-                        </div>
-                        <div class="module">
-                            <h5>8. SQLi</h5>
-                            <p>Learn about SQL Injection Vulnerability</p>
+                            <p>The database has been compromised! Attackers are using malicious queries to extract sensitive data. Investigate and secure the database.</p>
+                            <p><strong>Hint:</strong> Can you manipulate database queries through input fields?</p>
                             <button class="btn" onclick="deployLab('sqli')">Deploy Lab</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="path-card" onclick="togglePath(2)">
-                <h3>Network Security</h3>
-                <p>Master network protocols and exploitation</p>
-                <span class="difficulty intermediate">Intermediate</span>
-                
-                <div id="path-details-2" class="path-details">
-                    <h4>Modules:</h4>
-                    <div class="module-list">
-                        <div class="module">
-                            <h5>1. Network Fundamentals</h5>
-                            <p>Understanding OSI model and TCP/IP</p>
-                            <button class="btn" onclick="deployLab('network')">Deploy Lab</button>
-                        </div>
-                        <div class="module">
-                            <h5>2. Packet Analysis</h5>
-                            <p>Learn to use Wireshark and analyze traffic</p>
-                            <button class="btn" onclick="deployLab('packet')">Deploy Lab</button>
-                        </div>
-                    </div>
+            <a href="../shop/index.html" class="path-card-link">
+                <div class="path-card">
+                    <h3>Shop CTF</h3>
+                    <p>Explore the Shop CTF machine and find vulnerabilities.</p>
+                    <span class="difficulty intermediate">Intermediate</span>
+                    <p><strong>Hint:</strong> Always check source page!!.</p>
+                </div>
+            </a>
+            </div>
+        </div>
+    </div>
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
                 </div>
             </div>
+        <div class="terminal-content">
+            <pre>
+root@kali:~# nmap -sV 10.10.10.10
+Starting Nmap 7.91...
+Scanning 10.10.10.10...
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache/2.4.41
+22/tcp open  ssh     OpenSSH 8.2p1
+3306/tcp open mysql MySQL 8.0.23</pre>
         </div>
-        <div class="challenge-area">
-            <h3>CTF Challenge: Capture the Flag</h3>
-            <div class="terminal">
-                root@kali:~# nmap -sV 10.10.10.10
-                Starting Nmap 7.91...
-                Scanning 10.10.10.10...
-                PORT   STATE SERVICE VERSION
-                80/tcp open  http    Apache/2.4.41
-                22/tcp open  ssh     OpenSSH 8.2p1
-                3306/tcp open mysql MySQL 8.0.23
-            </div>
-            <p><strong>Objective:</strong> Exploit the vulnerable web application running on port 80 to retrieve the flag.</p>
-            <p><strong>Hints:</strong></p>
-            <ul>
-                <li>The web application may be vulnerable to SQL Injection.</li>
-                <li>Check for hidden directories using tools like `dirb` or `gobuster`.</li>
-                <li>Look for sensitive information in source code or comments.</li>
-            </ul>
-            <p>Found the flag? Submit it below:</p>
-            <input type="text" id="flag-input" placeholder="Enter flag (e.g., flag{...})">
-            <button class="btn" onclick="submitFlag()">Submit Flag</button>
-            <div id="flag-result"></div>
-        </div>
+    </div>
+    <div class="ctf-details">
+    <h3>About This CTF Machine</h3>
+    <p>
+        Welcome to this challenge! Your task is to find vulnerabilities in this machine and exploit them.
+        The system has multiple security flaws, including <strong>file upload vulnerabilities</strong> and 
+        <strong>misconfigured web services</strong>.
+    </p>
+    <h4>Objectives:</h4>
+    <ul>
+        <li>Analyze open ports and running services.</li>
+        <li>Find the vulnerable file upload functionality.</li>
+        <li>Exploit it to gain system access.</li>
+        <li>Capture the flag and submit it below.</li>
+    </ul>
+</div>
+<div class="flag-submission">
+    <h3>Submit Your Flag</h3>
+    <input type="text" id="flag-input" placeholder="Enter flag (e.g., flag{...})">
+    <button class="btn" onclick="checkFlag()">Submit Flag</button>
+    <div id="flag-result"></div>
+</div>
+
     </div>
 
     <script>
-        // Function to handle flag submission
-        function submitFlag() {
-            const flagInput = document.getElementById('flag-input').value;
-            const resultDiv = document.getElementById('flag-result');
-
-            // Example flag (replace with your actual flag)
-            const correctFlag = 'flag{sql_injection_is_fun}';
-
-            if (flagInput === correctFlag) {
-                resultDiv.innerHTML = '<p style="color: green;">Correct! You captured the flag!</p>';
+         // Function to handle flag submission
+    function checkFlag() {
+        const flag = document.getElementById('flag-input').value;
+        const resultDiv = document.getElementById('flag-result');
+        
+        fetch('php/flag.php', {  
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ flag: flag })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                resultDiv.innerHTML = '<p style="color: green;">' + data.message + '</p>';
+                if (data.points_awarded > 0) {
+                    const pointsDisplay = document.getElementById('pointsDisplay');
+                    if (pointsDisplay) {
+                        fetchPoints();
+                    }
+                }
+                document.getElementById('flag-input').value = '';
             } else {
-                resultDiv.innerHTML = '<p style="color: red;">Incorrect flag. Try again!</p>';
+                resultDiv.innerHTML = '<p style="color: red;">' + data.message + '</p>';
             }
-        }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            resultDiv.innerHTML = '<p style="color: red;">An error occurred while validating the flag</p>';
+        });
+    }
 
         // Optional: Simulate terminal output dynamically
         window.onload = () => {

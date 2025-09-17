@@ -51,41 +51,35 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    background: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    background: rgba(30, 39, 46, 0.95);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    z-index: 1000;
-    width: 200px; /* Fixed width for consistency */
-    animation: fadeIn 0.3s ease-in-out; /* Smooth fade-in animation */
+    min-width: 200px;
+    backdrop-filter: blur(10px);
 }
 
 .profile-dropdown:hover .dropdown-menu {
     display: block;
+    animation: fadeIn 0.2s ease-out;
 }
 
 .dropdown-menu a {
     display: block;
-    color: #fff; /* White text for contrast */
+    padding: 0.8rem 1.5rem;
+    color: #fff;
     text-decoration: none;
-    padding: 12px 15px; /* Spacing for clickable area */
-    transition: background 0.3s ease; /* Smooth hover effect */
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
 }
 
 .dropdown-menu a:hover {
-    background: rgba(255, 255, 255, 0.1); /* Slight highlight on hover */
+    background: var(--hover-bg);
+    border-left-color: var(--primary);
+    padding-left: 2rem;
 }
 
-.dropdown-menu::before {
-    content: '';
-    position: absolute;
-    top: -10px; /* Positions the triangle above the dropdown */
-    right: 15px;
-    border: 5px solid transparent;
-    border-bottom-color: rgba(255, 255, 255, 0.05); /* Matches dropdown background */
-}
-
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -96,6 +90,7 @@ body {
         transform: translateY(0);
     }
 }
+
 
 .container {
     max-width: 1200px;
@@ -197,4 +192,122 @@ input {
 #flag-result {
     margin-top: 1rem;
     font-weight: bold;
+}
+
+.terminal {
+    margin: 2rem 0;
+    background: #0a0a0a;
+    padding: 2rem;
+    border-radius: 12px;
+    position: relative;
+}
+
+.terminal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: #1a1a1a;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.terminal-content {
+    margin-top: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #00ff00;
+}
+
+.ctf-details {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.ctf-details h3 {
+    color: #7b68ee;
+    margin-bottom: 10px;
+}
+
+.ctf-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ctf-details li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.ctf-details li::before {
+    content: "⚡";
+    position: absolute;
+    left: 0;
+    color: #7b68ee;
+}
+
+.flag-submission {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.flag-submission input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-right: 10px;
+    width: 300px;
+}
+
+.flag-submission .btn {
+    padding: 10px 20px;
+    background: #7b68ee;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.flag-submission .btn:hover {
+    background: #5b4bc4;
+}
+.path-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.path-card-link .path-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.path-card-link .path-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3);
 }

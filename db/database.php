@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'cyberseclab';
 $username = 'root'; // Replace with your MySQL username
-$password = 'Appu@kali';     // Replace with your MySQL password
+$password = '12345678';     // Replace with your MySQL password
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

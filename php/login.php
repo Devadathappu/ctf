@@ -16,12 +16,12 @@ if (!isset($_SESSION['lockout_time'])) {
 // Check if the user is locked out
 if ($_SESSION['lockout_time'] !== null) {
     $current_time = time();
-    $lockout_duration = 360; // 1 hour in seconds
+    $lockout_duration = 300; // 5 minutes in seconds
 
     if ($current_time - $_SESSION['lockout_time'] < $lockout_duration) {
         // User is still locked out
         $remaining_time = ceil(($lockout_duration - ($current_time - $_SESSION['lockout_time'])) / 60);
-        die("Too many failed login attempts. Please try again in $remaining_time minutes.");
+        die("Too many failed login attempts. Please try again in $remaining_time minute(s).");
     } else {
         // Lockout period has expired, reset counters
         $_SESSION['failed_attempts'] = 0;
@@ -47,22 +47,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../landing_page.php');
             exit;
         } else {
-            // Invalid credentials
+            // Invalid credentials, increment failed attempts
             $_SESSION['failed_attempts']++;
-            header('Location: /ctf');
-            if ($_SESSION['failed_attempts'] >= 5) {
-                // Lock the account for 1 hour
-                $_SESSION['lockout_time'] = time();
-                die("Too many failed login attempts. Please try again in 1 hour.");
-            }
 
-            $error = 'Invalid username or password.';
-            echo "<script>alert('$error'); window.location.href='login.html';</script>";
-            exit;
+            if ($_SESSION['failed_attempts'] >= 5) {
+                // Lock the account for 5 minutes
+                $_SESSION['lockout_time'] = time();
+                // Display lockout message and the local GIF
+                echo "<p>OOMBE OOMBE OOMBE!!! Please try again in 5 minutes.</p>";
+                echo '<div style="max-width: 200px; margin: 0 auto;">';
+                echo '<img src="../media/i-just-lost-my-dog-white-dog.gif" alt="Locked" style="width: 200px; display: block; margin: 0 auto;">';
+                echo '</div>';
+                exit();
+            } else {
+                // For less than 5 failed attempts, alert error and redirect to index.html in root
+                $error = 'Invalid username or password.';
+                echo "<script>alert('$error'); window.location.href='../index.html';</script>";
+                exit;
+            }
         }
     } else {
         $error = 'Please fill in all fields.';
-        echo "<script>alert('$error'); window.location.href='login.html';</script>";
+        echo "<script>alert('$error'); window.location.href='../index.html';</script>";
         exit;
     }
 }

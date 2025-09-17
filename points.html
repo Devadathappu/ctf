@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberSecLab - Points</title>
+  <link rel="stylesheet" href="css/index.css">
+  <script src="js/index.js"></script>
+  <style>
+    .points-container {
+      max-width: 400px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .points-container h2 {
+      margin-bottom: 1rem;
+      color: #7b68ee;
+    }
+    .points-display {
+      font-size: 3rem;
+      color: #ffffff;
+      margin: 20px 0;
+    }
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+      background: #7b68ee;
+      color: white;
+      transition: transform 0.3s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation bar -->
+  <nav class="navbar">
+      <div class="logo">CyberSecLab</div>
+      <div class="nav-links">
+          <div class="profile-dropdown">
+              <a href="#profile">Profile</a>
+              <div class="dropdown-menu">
+                  <a href="signup.html">Account</a>
+                  <a href="php/points.php">Points</a>
+                  <a href="php/logout.php">Logout</a>
+              </div>
+          </div>
+      </div>
+  </nav>
+
+  <div class="container">
+    <div class="points-container">
+      <h2>Your Points</h2>
+      <div class="points-display" id="pointsDisplay">Loading...</div>
+      <button class="btn" id="refreshBtn">Refresh Points</button>
+    </div>
+  </div>
+  <script src="js/points.js"></script>
+  <script>
+    function fetchPoints() {
+      fetch('php/points_api.php')
+        .then(response => response.json())
+        .then(data => {
+          if(data.success) {
+            document.getElementById('pointsDisplay').textContent = data.points;
+          } else {
+            document.getElementById('pointsDisplay').textContent = 'Error';
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('pointsDisplay').textContent = 'Error';
+        });
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', fetchPoints);
+    window.addEventListener('load', fetchPoints);
+  </script>
+</body>
+</html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureShare - File Upload Portal</title>
+    <!-- You can reference your CSS here if you like -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -12,8 +13,13 @@
             <div class="logo">SecureShare</div>
             <div class="nav-links">
                 <a href="#" class="active">Upload</a>
-                <a href="#files">My Files</a>
-                <a href="#profile">Profile</a>
+                <div class="profile-dropdown">
+                    <a href="#" id="profile-btn">Profile</a>
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <a href="../../php/points.php">Points</a>
+                        <a href="../../php/logout.php">Logout</a>
+                    </div>
+                </div>                
             </div>
         </nav>
 
@@ -22,22 +28,18 @@
                 <h1>Welcome to SecureShare</h1>
                 <p class="subtitle">Upload and share your documents securely</p>
 
-                <div class="upload-area" id="dropZone">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%236c5ce7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="Upload">
-                    <h3>Drag & Drop files here</h3>
-                    <p>or</p>
-                    <label for="fileInput" class="upload-btn">Choose File</label>
-                    <input type="file" id="fileInput" hidden>
-                </div>
-
-                <div class="upload-list" id="uploadList"></div>
-
-                <div class="upload-status" id="uploadStatus"></div>
-                
-                <div class="flag-submission">
-                    <input type="text" id="flag-input" placeholder="Enter flag when found">
-                    <button onclick="checkFlag()" class="submit-btn">Submit Flag</button>
-                </div>
+                <!-- The form points to php/upload.php (the vulnerable handler) -->
+                <form id="uploadForm" action="php/upload.php" method="POST" enctype="multipart/form-data">
+                    <div class="upload-area" id="dropZone">
+                        <!-- Icon -->
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%236c5ce7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="Upload">
+                        <h3>Drag & Drop files here</h3>
+                        <p>or</p>
+                        <label for="fileInput" class="upload-btn">Choose File</label>
+                        <input type="file" id="fileInput" name="fileInput" hidden>
+                    </div>
+                    <button type="submit" class="btn">Upload</button>
+                </form>
             </div>
 
             <div class="hints-panel">
@@ -59,6 +61,7 @@
             </div>
         </div>
     </div>
+    <!-- You can reference your JS here if you like -->
     <script src="js/main.js"></script>
 </body>
 </html>

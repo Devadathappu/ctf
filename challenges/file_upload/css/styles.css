@@ -44,6 +44,58 @@ body {
     opacity: 1;
 }
 
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(30, 39, 46, 0.95);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+}
+
+.profile-dropdown:hover .dropdown-menu {
+    display: block;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.dropdown-menu a:hover {
+    background: var(--hover-bg);
+    border-left-color: var(--primary);
+    padding-left: 2rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 .main-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -202,3 +254,29 @@ h1 {
     color: #ff4757;
     display: block;
 }
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #7b68ee; /* Primary button background */
+    color: #fff;             /* White text */
+    border: none;            /* No border */
+    border-radius: 5px;      /* Rounded corners */
+    font-size: 1rem;         /* Base font size */
+    font-weight: bold;       /* Bold text */
+    text-align: center;
+    cursor: pointer;         /* Pointer on hocver */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #6a5acd; /* Darker on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.btn:active {
+    background-color: #5a4cab; /* Even darker on active click */
+    transform: translateY(0);  /* Reset lift on click */
+}
+

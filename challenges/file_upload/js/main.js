@@ -1,9 +1,14 @@
-// assets/js/main.js
 document.addEventListener('DOMContentLoaded', function() {
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
-    const uploadList = document.getElementById('uploadList');
-    const uploadStatus = document.getElementById('uploadStatus');
+    const uploadList = document.getElementById('uploadList'); // Ensure this element exists in your HTML if you use it.
+    const uploadStatus = document.getElementById('uploadStatus'); // Ensure this element exists in your HTML if you use it.
+
+    // Create a span element to display the selected file name.
+    const fileNameDisplay = document.createElement('span');
+    fileNameDisplay.className = 'file-name-display';
+    fileNameDisplay.style.display = 'none'; // Hidden by default.
+    dropZone.appendChild(fileNameDisplay);
 
     // Drag and drop handlers
     dropZone.addEventListener('dragover', (e) => {
@@ -19,10 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         dropZone.style.borderColor = 'rgba(108, 92, 231, 0.3)';
+        if (e.dataTransfer.files.length > 0) {
+            fileNameDisplay.textContent = `Selected: ${e.dataTransfer.files[0].name}`;
+            fileNameDisplay.style.display = 'block';
+        }
         handleFiles(e.dataTransfer.files);
     });
 
+    // Update file name display when a file is selected via the file input
     fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            fileNameDisplay.textContent = `Selected: ${e.target.files[0].name}`;
+            fileNameDisplay.style.display = 'block';
+        }
         handleFiles(e.target.files);
     });
 
@@ -34,13 +48,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function uploadFile(file) {
         const formData = new FormData();
-        formData.append('file', file);
-
-        // Add file to UI list
+        // Use the same key name as expected by upload.php:
+        formData.append('fileInput', file);
+    
         const fileItem = createFileListItem(file);
-        uploadList.appendChild(fileItem);
-
-        fetch('upload.php', {
+        if (uploadList) {
+            uploadList.appendChild(fileItem);
+        }
+    
+        fetch('php/upload.php', {
             method: 'POST',
             body: formData
         })
@@ -50,6 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 fileItem.querySelector('.file-status').textContent = 'Uploaded';
                 fileItem.querySelector('.file-status').style.color = '#2ed573';
                 showStatus('File uploaded successfully!', 'success');
+                // Only set preview if a valid URL is returned
+                if (data.fileUrl) {
+                    const img = document.createElement('img');
+                    img.src = data.fileUrl;
+                    img.alt = "Uploaded file preview";
+                    // Clear previous preview and add new image
+                    if (uploadList) {
+                        uploadList.innerHTML = '';
+                        uploadList.appendChild(img);
+                    }
+                }
             } else {
                 fileItem.querySelector('.file-status').textContent = 'Failed';
                 fileItem.querySelector('.file-status').style.color = '#ff4757';
@@ -62,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showStatus('Upload failed: ' + error.message, 'error');
         });
     }
-
+    
     function createFileListItem(file) {
         const item = document.createElement('div');
         item.className = 'file-item';
@@ -77,17 +104,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showStatus(message, type) {
-        uploadStatus.textContent = message;
-        uploadStatus.className = 'upload-status ' + type;
-        setTimeout(() => {
-            uploadStatus.style.display = 'none';
-        }, 5000);
+        if (uploadStatus) {
+            uploadStatus.textContent = message;
+            uploadStatus.className = 'upload-status ' + type;
+            uploadStatus.style.display = 'block';
+            setTimeout(() => {
+                uploadStatus.style.display = 'none';
+            }, 5000);
+        }
     }
 });
 
+// A separate function for flag checking if needed.
 function checkFlag() {
     const flag = document.getElementById('flag-input').value;
-    // You can change this flag value based on your challenge
+    // Adjust the flag value as needed for your challenge.
     if (flag.toLowerCase() === 'flag{file_upload_master}') {
         alert('Congratulations! You have completed the challenge!');
     } else {

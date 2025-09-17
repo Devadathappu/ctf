@@ -1,0 +1,9 @@
+<Files *>
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files "phpinfo.php">
+Order Deny,Allow
+Allow from all
+</Files>
