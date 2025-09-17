@@ -1,4 +1,4 @@
-# 🛡️ Capture The Flag (CTF) Platform – March 2025
+# 🛡️ Capture The Flag (CTF) Platform
 
 A custom-built **Capture The Flag (CTF) platform** designed to help learners and SOC teams practice web application exploitation and detection in a safe, controlled environment.  
 
